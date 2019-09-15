@@ -107,8 +107,8 @@ public class RandomWalk {
             for (int cunt = 0; cunt < 5; cunt++) {
                 double meanDistance = randomWalkMulti(m, n);
                 powMeanDistance = Math.pow(meanDistance,2);
-                System.out.println(m + ";" + meanDistance + ";" + powMeanDistance);
-//                System.out.println("After " + m + " steps," + " meanDistance: " + meanDistance + " Square of meanDistance: " + powMeanDistance);
+//                System.out.println(m + ";" + meanDistance + ";" + powMeanDistance);
+                System.out.println("After " + m + " steps," + " meanDistance: " + meanDistance + " Square of meanDistance: " + powMeanDistance);
             }
             // the number of steps add 100 per time
             m = m + 100;
