@@ -5,7 +5,7 @@
 package edu.neu.coe.info6205.randomwalk;
 
 import java.util.Random;
-import java.lang.Math;
+
 
 public class RandomWalk {
 
@@ -70,7 +70,7 @@ public class RandomWalk {
     /**
      * Perform multiple random walk experiments, returning the mean distance.
      *
-     * @param m the number of steps for each experiment (每次expriments走多少步）
+     * @param m the number of steps for each experiment
      * @param n the number of experiments to run
      * @return the mean distance
      */
@@ -84,20 +84,35 @@ public class RandomWalk {
         return totalDistance / n;
     }
 
+    /**
+     * @param args the input argument to define the parameter "rounds"
+     * */
     public static void main(String[] args) {
-//        if (args.length == 0)
-//            throw new RuntimeException("Syntax: RandomWalk steps [experiments]");
-//        int m = Integer.parseInt(args[0]);
-//        int n = 30;
-//        if (args.length > 1) n = Integer.parseInt(args[1]);
-//        double meanDistance = randomWalkMulti(m, n);
-//        System.out.println(m + " steps: " + meanDistance + " over " + n + " experiments");
+        if (args.length == 0)
+            throw new RuntimeException("Syntax: RandomWalk steps [experiments]");
 
-
-        int m = 5009;
+        // rounds the number of round the randomWalkMuti function runs
+        int rounds = Integer.parseInt(args[0]);
+        //try n times per round to calculate the meanDistance
         int n = 30;
-        double meanDis = randomWalkMulti(m, n);
-        System.out.println(m + " steps: " + meanDis + " over " + n + " experiments");
+        // the number of steps per time of calculation
+        int m = 100;
+        // square of meanDistance
+        double powMeanDistance = 1;
+
+        if (args.length > 1) n = Integer.parseInt(args[1]);
+
+        // loop to calculate rounds*cunt times of meanDistance
+        for(int i=0; i<rounds; i++) {
+            for (int cunt = 0; cunt < 5; cunt++) {
+                double meanDistance = randomWalkMulti(m, n);
+                powMeanDistance = Math.pow(meanDistance,2);
+                System.out.println(m + ";" + meanDistance + ";" + powMeanDistance);
+//                System.out.println("After " + m + " steps," + " meanDistance: " + meanDistance + " Square of meanDistance: " + powMeanDistance);
+            }
+            // the number of steps add 100 per time
+            m = m + 100;
+        }
 
     }
 
