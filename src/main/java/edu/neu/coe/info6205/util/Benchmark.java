@@ -6,7 +6,6 @@ package edu.neu.coe.info6205.util;
 
 import edu.neu.coe.info6205.sort.simple.Helper;
 import edu.neu.coe.info6205.sort.simple.InsertionSort;
-import edu.neu.coe.info6205.sort.simple.SelectionSort;
 import edu.neu.coe.info6205.sort.simple.Sort;
 
 import java.util.Arrays;
@@ -172,7 +171,7 @@ public class Benchmark<T> {
             Integer[] array = new Integer[n];
             for (int i = 0; i < n; i++) array[i] = random.nextInt();
             benchmarkSort(array, "InsertionSort: " + n, new InsertionSort<>(), m);
-            benchmarkSort(array, "SelectionSort: " + n, new SelectionSort<>(), m);
+//            benchmarkSort(array, "SelectionSort: " + n, new SelectionSort<>(), m);
             n = n * 2;
         }
     }
