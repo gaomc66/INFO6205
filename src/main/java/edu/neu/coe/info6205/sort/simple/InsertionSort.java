@@ -1,8 +1,6 @@
 package edu.neu.coe.info6205.sort.simple;
 
 
-import java.util.Arrays;
-
 public class InsertionSort<X extends Comparable<X>> implements Sort<X> {
 
     /**
@@ -20,7 +18,6 @@ public class InsertionSort<X extends Comparable<X>> implements Sort<X> {
 
     @Override
     public void sort(X[] xs, int from, int to) {
-        Arrays.sort(xs);
         for (int i = from; i < to; i++) {
             // Invariant 1: elements xs[from..i] are in order
             // TO BE IMPLEMENTED ...
@@ -29,6 +26,8 @@ public class InsertionSort<X extends Comparable<X>> implements Sort<X> {
             }
             // ... END IMPLEMENTATION
         }
+
+//        System.out.println("from: " + from + "to: " + to);
 //        for (X s : xs) {
 //            System.out.println(s+" ");
 //        }

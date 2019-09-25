@@ -105,6 +105,16 @@ public class Benchmark<T> {
     }
 
     /**
+     * The first parameter to the first run method signature is the parameter that will, in turn,
+     * be passed to target function.
+     *
+     * In the second signature, supplier will be invoked each time to get
+     * a t which is passed to the other run method.
+     *
+     * The second parameter to the run function (m) is the number of times the target function will be called.
+     *
+     * The return value from run is the average number of milliseconds taken for each run of the target function.
+     *
      * Run function f m times and return the average time in milliseconds.
      *
      * @param supplier a Supplier of a T
@@ -113,7 +123,7 @@ public class Benchmark<T> {
      */
     public double run(Supplier<T> supplier, int m) {
         // Warmup phase
-        int warmupRuns = Integer.min(2, Integer.max(10, m / 10));
+        int warmupRuns = Integer.max(2, Integer.min(10, m / 10));
         for (int i = 0; i < warmupRuns; i++) doRun(supplier.get(), true);
         // Timed phase
         long totalTime = 0;
@@ -167,9 +177,20 @@ public class Benchmark<T> {
         Random random = new Random();
         int m = 100; // This is the number of repetitions: sufficient to give a good mean value of timing
         int n = 1000; // This is the size of the array
-        for (int k = 0; k < 5; k++) {
+        for (int k = 0; k < 10; k++) {
             Integer[] array = new Integer[n];
-            for (int i = 0; i < n; i++) array[i] = random.nextInt();
+            // initialize a random array
+//            for (int i = 0; i < n; i++) array[i] = random.nextInt();
+            // initialize a ordered array
+//            for (int i = 0; i < n; i++) array[i] = i;
+            // initialize a part random array
+//            for (int i=0; i<n/2; i++) array[i] = random.nextInt();
+//            for (int i=n/2+1; i<n; i++) array[i] = i;
+            // initialize a reversed-ordered array
+            for (int i=0; i<n; i++) array[i] = n-i;
+
+
+
             benchmarkSort(array, "InsertionSort: " + n, new InsertionSort<>(), m);
 //            benchmarkSort(array, "SelectionSort: " + n, new SelectionSort<>(), m);
             n = n * 2;
@@ -186,5 +207,6 @@ public class Benchmark<T> {
         Benchmark<Integer[]> bm = new Benchmark<>(preFunction, sortFunction, cleanupFunction);
         double x = bm.run(array, m);
         System.out.println(name + ": " + x + " millisecs");
+//        System.out.println(x);
     }
 }
