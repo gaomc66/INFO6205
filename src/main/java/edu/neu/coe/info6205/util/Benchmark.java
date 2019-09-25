@@ -176,18 +176,18 @@ public class Benchmark<T> {
     public static void main(String[] args) {
         Random random = new Random();
         int m = 100; // This is the number of repetitions: sufficient to give a good mean value of timing
-        int n = 1000; // This is the size of the array
-        for (int k = 0; k < 10; k++) {
+        int n = 250; // This is the size of the array
+        for (int k = 0; k < 5; k++) {
             Integer[] array = new Integer[n];
             // initialize a random array
-//            for (int i = 0; i < n; i++) array[i] = random.nextInt();
+            for (int i = 0; i < n; i++) array[i] = random.nextInt();
             // initialize a ordered array
 //            for (int i = 0; i < n; i++) array[i] = i;
-            // initialize a part random array
+//            // initialize a part random array
 //            for (int i=0; i<n/2; i++) array[i] = random.nextInt();
-//            for (int i=n/2+1; i<n; i++) array[i] = i;
+//            for (int i=n/2; i<n; i++) array[i] = i;
             // initialize a reversed-ordered array
-            for (int i=0; i<n; i++) array[i] = n-i;
+//            for (int i=0; i<n; i++) array[i] = n-i;
 
 
 
