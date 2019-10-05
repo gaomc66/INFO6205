@@ -28,22 +28,30 @@ public class UFClient {
 
     public static void main (String args[]) {
 
-//        Scanner scan = new Scanner(System.in);
-//        System.out.println("Enter the Number of N:   ");
-////        int n = scan.nextInt();
-////        System.out.println("Enter the Times of Calculation:");
-////        int times = scan.nextInt();
-//        scan.close();
+        Scanner scan = new Scanner(System.in);
+//        System.out.println("Enter the Sites Number:");
+//        int n = scan.nextInt();
+        System.out.println("Enter the Times of Increase N:");
+        int increase = scan.nextInt();
+        System.out.println("Enter the Times of Each N to Calculate Average:");
+        int times = scan.nextInt();
+        scan.close();
 
-        int times = 1000;
-        int average = 0;
+        int average;
 
-        for(int n=100; n< 409601; n=n*2) {
+        double amount = 100*Math.pow(2,increase);
 
-            for (int i = 0; i < times; i++) {
+        for(int n=100;  n< amount; n=n*2) {
+
+            average = 0;
+
+            for (int j = 0; j < times; j++) {
                 average = average + count(n);
             }
-            System.out.println(n + " ; " + average/times +" ; " + );
+
+            System.out.println("sites: "+ n + " ;  Average: " + average/times );
+            System.out.println("1/2NlnN: " + 1.0/2.0 * (double)n * Math.log((double)n));
+            System.out.println();
 
         }
 //        System.out.println("Average count: " + average/times);
