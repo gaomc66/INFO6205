@@ -4,10 +4,9 @@ import java.io.BufferedWriter;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 import java.util.concurrent.ForkJoinPool;
 
 /**
@@ -16,9 +15,16 @@ import java.util.concurrent.ForkJoinPool;
  */
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         processArgs(args);
-        System.out.println("Degree of parallelism: " + ForkJoinPool.getCommonPoolParallelism());
+//        System.out.println("Degree of parallelism: " + ForkJoinPool.getCommonPoolParallelism());
+        System.out.println("Please input the degree of paralleism:");
+        Scanner input = new Scanner(System.in);
+        int fixedTreadPoolNum = input.nextInt();
+        System.out.println("is:" + fixedTreadPoolNum);
+
+        Executor executor = Executors.newFixedThreadPool(fixedTreadPoolNum);
+
         Random random = new Random();
         int[] array = new int[2000000];
         ArrayList<Long> timeList = new ArrayList<>();
@@ -29,15 +35,18 @@ public class Main {
             long startTime = System.currentTimeMillis();
             for (int t = 0; t < 10; t++) {
                 for (int i = 0; i < array.length; i++) array[i] = random.nextInt(10000000);
-                ParSort.sort(array, 0, array.length);
+                ParSort.sort(array, 0, array.length,executor);
             }
             long endTime = System.currentTimeMillis();
             time = (endTime - startTime);
             timeList.add(time);
 
+            System.out.println((ParSort.cutoff) +"  "+ time);
 
-            System.out.println("cutoff：" + (ParSort.cutoff) + "\t\t10times Time:" + time + "ms");
-
+//            System.out.println("cutoff：" + (ParSort.cutoff) + "\t\t10times Time:" + time + "ms");
+//            int[] temp = new int[5];
+//            temp = Arrays.copyOfRange(array,90,95);
+//            System.out.print(temp[0] + " " + temp[1] +" " + temp[2] +" " + temp[3] +" " + temp[4]);
         }
         try {
             FileOutputStream fis = new FileOutputStream("./src/result.csv");

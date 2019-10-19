@@ -124,10 +124,14 @@ public class Benchmark<T> {
     public double run(Supplier<T> supplier, int m) {
         // Warmup phase
         int warmupRuns = Integer.max(2, Integer.min(10, m / 10));
-        for (int i = 0; i < warmupRuns; i++) doRun(supplier.get(), true);
+        for (int i = 0; i < warmupRuns; i++) {
+            doRun(supplier.get(), true);
+        }
         // Timed phase
         long totalTime = 0;
-        for (int i = 0; i < m; i++) totalTime += doRun(supplier.get(), false);
+        for (int i = 0; i < m; i++) {
+            totalTime += doRun(supplier.get(), false);
+        }
         return (double) totalTime / m / 1000000;
     }
 
@@ -180,7 +184,9 @@ public class Benchmark<T> {
         for (int k = 0; k < 5; k++) {
             Integer[] array = new Integer[n];
             // initialize a random array
-            for (int i = 0; i < n; i++) array[i] = random.nextInt();
+            for (int i = 0; i < n; i++) {
+                array[i] = random.nextInt();
+            }
             // initialize a ordered array
 //            for (int i = 0; i < n; i++) array[i] = i;
 //            // initialize a part random array
