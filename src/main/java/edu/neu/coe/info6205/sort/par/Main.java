@@ -4,9 +4,10 @@ import java.io.BufferedWriter;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
-import java.util.*;
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
 import java.util.concurrent.ForkJoinPool;
 
 /**
@@ -17,35 +18,37 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         processArgs(args);
-//        System.out.println("Degree of parallelism: " + ForkJoinPool.getCommonPoolParallelism());
-        System.out.println("Please input the degree of paralleism:");
-        Scanner input = new Scanner(System.in);
-        int fixedTreadPoolNum = input.nextInt();
-        System.out.println("is:" + fixedTreadPoolNum);
-
-        Executor executor = Executors.newFixedThreadPool(fixedTreadPoolNum);
+        System.out.println("Degree of parallelism: " + ForkJoinPool.getCommonPoolParallelism());
+//        System.out.println("Please input the degree of paralleism:");
+//        Scanner input = new Scanner(System.in);
+//        int fixedTreadPoolNum = input.nextInt();
+//        System.out.println("is:" + fixedTreadPoolNum);
+//
+//        Executor executor = Executors.newFixedThreadPool(fixedTreadPoolNum);
 
         Random random = new Random();
-        int[] array = new int[2000000];
+        int[] array = new int[100000000];
+
         ArrayList<Long> timeList = new ArrayList<>();
-        for (int j = 50; j < 100; j++) {
-            ParSort.cutoff = 10000 * (j + 1);
+        for (int j = 0; j < 40; j++) {
+            ParSort.cutoff =5000 * (j +1);
             // for (int i = 0; i < array.length; i++) array[i] = random.nextInt(10000000);
             long time;
             long startTime = System.currentTimeMillis();
             for (int t = 0; t < 10; t++) {
                 for (int i = 0; i < array.length; i++) array[i] = random.nextInt(10000000);
-                ParSort.sort(array, 0, array.length,executor);
+//                ParSort.sort(array, 0, array.length,executor);
+                ParSort.sort(array, 0, array.length);
             }
             long endTime = System.currentTimeMillis();
             time = (endTime - startTime);
             timeList.add(time);
 
             System.out.println((ParSort.cutoff) +"  "+ time);
-
+//
 //            System.out.println("cutoff：" + (ParSort.cutoff) + "\t\t10times Time:" + time + "ms");
 //            int[] temp = new int[5];
-//            temp = Arrays.copyOfRange(array,90,95);
+//            temp = Arrays.copyOfRange(array,180,185);
 //            System.out.print(temp[0] + " " + temp[1] +" " + temp[2] +" " + temp[3] +" " + temp[4]);
         }
         try {
