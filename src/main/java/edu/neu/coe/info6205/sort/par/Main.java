@@ -27,11 +27,11 @@ public class Main {
 //        Executor executor = Executors.newFixedThreadPool(fixedTreadPoolNum);
 
         Random random = new Random();
-        int[] array = new int[100000000];
+        int[] array = new int[2000000];
 
         ArrayList<Long> timeList = new ArrayList<>();
-        for (int j = 0; j < 40; j++) {
-            ParSort.cutoff =5000 * (j +1);
+        for (int j = 50; j < 100; j++) {
+            ParSort.cutoff =1000 * (j +1);
             // for (int i = 0; i < array.length; i++) array[i] = random.nextInt(10000000);
             long time;
             long startTime = System.currentTimeMillis();
